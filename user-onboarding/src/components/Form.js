@@ -9,6 +9,18 @@ const Form = (props) => {
         errors
     } = props
 
+    const onSubmit = evt => {
+        evt.preventDefault()
+        submit()
+      }
+    
+      const onChange = evt => {
+        const { name, value, checked, type } = evt.target
+        const valueToUse = type === "checkbox" ? checked : value
+        change(name, valueToUse)
+      }
+    
+
     return (
         <div className='container'>
             <form className='form container'>
@@ -17,6 +29,8 @@ const Form = (props) => {
                     type='text'
                     name='firstName'
                     placeholder='Enter First Name'
+                    value={values.firstName}
+                    onChange={onChange}
                     />
                 </label>
                 <label>Last Name
@@ -24,6 +38,8 @@ const Form = (props) => {
                     type='text'
                     name='lastName'
                     placeholder='Enter Last Name'
+                    value={values.lastName}
+                    onChange={onChange}
                     />
                 </label>
                 <label>Email
@@ -31,6 +47,8 @@ const Form = (props) => {
                     type='text'
                     name='email'
                     placeholder='Enter Email Address'
+                    value={values.email}
+                    onChange={onChange}
                     />
                 </label>
                 <label>Password
@@ -38,6 +56,8 @@ const Form = (props) => {
                     type='password'
                     name='password'
                     placeholder="Enter Password"
+                    value={values.password}
+                    onChange={onChange}
                     />
                 </label>
                 <label>Terms and Conditions

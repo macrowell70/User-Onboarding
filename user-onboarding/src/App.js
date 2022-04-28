@@ -27,6 +27,13 @@ function App() {
   const [formError, setFormError] = useState(initialFormError);
   const [disabled, setDisabled] = useState(initialDisabled);
 
+  const postNewUser = newUser => {
+    axios.post("https://reqres.in/api/users", newUser)
+      .then(res => {
+        setUsers([ res.data, ...users ])
+        setFormValues(initialFormValues)
+      }).catch(err => console.error(err))
+  }
 
   const validate = (name, value) => {
     yup.reach(schema, name)
@@ -35,11 +42,32 @@ function App() {
       .catch((err) => setFormError({ ...formError, [name]: err.errors[0] }))
   };
 
+  const inputChange = (name, value) => {
+    validate(name, value)
+    setFormValues({ ...formValues, [name]: value })
+  }
+
+  const formSubmit = () => {
+    const newUser = {
+      firstName: formValues.firstName.trim(),
+      lastName: formValues.lastName.trim(),
+      email: formValues.email.trim(),
+      password: formValues.password.trim(),
+    }
+    postNewUser(newUser);
+  }
+
 
   return (
     <div className="App">
       <header className="App-header">
-        <Form />
+        <Form
+        values={formValues}
+        change={inputChange}
+        submit={formSubmit}
+        disabled={disabled}
+        errors={formError}
+        />
       </header>
     </div>
   );
