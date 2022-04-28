@@ -3,6 +3,7 @@ import './App.css';
 import Form from './components/Form';
 import axios from 'axios';
 import * as yup from 'yup';
+import schema from './components/formSchema';
 
 const initialFormValues = {
   firstName: "",
@@ -25,6 +26,14 @@ function App() {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formError, setFormError] = useState(initialFormError);
   const [disabled, setDisabled] = useState(initialDisabled);
+
+
+  const validate = (name, value) => {
+    yup.reach(schema, name)
+      .validate(value)
+      .then(() => setFormError({ ...formError, [name]: "" }))
+      .catch((err) => setFormError({ ...formError, [name]: err.errors[0] }))
+  };
 
 
   return (
