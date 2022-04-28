@@ -65,7 +65,7 @@ const Form = (props) => {
                     type='checkbox'
                     />
                 </label>
-                <button>Submit</button>
+                <button id="submitBtn">Submit</button>
             </form>
         </div>
     )
