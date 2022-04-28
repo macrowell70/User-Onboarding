@@ -68,6 +68,13 @@ function App() {
         disabled={disabled}
         errors={formError}
         />
+
+        {users.map(user => {
+          <div key={user.id}>
+            <p>{user.firstName}</p>
+            <p>{user.lasName}</p>
+          </div>
+        })}
       </header>
     </div>
   );

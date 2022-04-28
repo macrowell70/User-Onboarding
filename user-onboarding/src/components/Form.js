@@ -23,7 +23,7 @@ const Form = (props) => {
 
     return (
         <div className='container'>
-            <form className='form container'>
+            <form className='form container' onSubmit={onSubmit}>
                 <label>First Name
                     <input 
                     type='text'
